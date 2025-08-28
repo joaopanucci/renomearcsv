@@ -302,10 +302,10 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
-    if sys.platform.startswith("win"):
-        try:
-            from ctypes import windll  # type: ignore
-            windll.shcore.SetProcessDpiAwareness(1)
-        except Exception:
-            pass
+    try:
+        if os.name == "nt":  # Windows
+            import ctypes
+            ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    except Exception:
+        pass
     App().mainloop()
